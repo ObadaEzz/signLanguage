@@ -15,6 +15,11 @@ from gtts import gTTS
 from playsound import playsound
 
 from Lib import HandTrackingModule as htm
+
+import arabic_reshaper
+
+from bidi.algorithm import get_display
+
 def sign():
   layout = [
 
@@ -155,8 +160,10 @@ def sign():
       window.refresh() 
       #cv2.imshow("Image", img)
       if index!=oldindex :
-  
-         window["word"].update(myListword[index])
+         TTarab=myListword[index]
+         reshaped_text = arabic_reshaper.reshape(TTarab)
+         bidi_text = get_display(reshaped_text)
+         window["word"].update(bidi_text)
          window.refresh()
          k="sound/"+myListsound[index]
          playsound(k,False)
