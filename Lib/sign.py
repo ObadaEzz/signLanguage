@@ -96,6 +96,12 @@ def sign():
       
 
       if len(lmList) != 0:
+        if lmList[4][2] > lmList[3 ][2]:
+           a=3
+         
+
+        else:
+           a=1
         if lmList[4][1] > lmList[3 ][1]:
            a=3
          
@@ -119,6 +125,16 @@ def sign():
                else:
                  a=1
           fingers.append(a)
+          if lmList[tipIds[id]][1] < lmList[tipIds[id] - 1][1]:
+                 a=3
+          else:
+               if lmList[tipIds[id] - 1][2] < lmList[tipIds[id] - 2][2]:
+                 a=2
+               else:
+                 a=1
+          fingers.append(a)
+          
+        print(fingers)
           
         z=[str(y)for y in fingers]
         az="".join(z)
@@ -160,8 +176,8 @@ def sign():
       window.refresh() 
       #cv2.imshow("Image", img)
       if index!=oldindex :
-         TTarab=myListword[index]
-         reshaped_text = arabic_reshaper.reshape(TTarab)
+         wordds=myListword[index]
+         reshaped_text = arabic_reshaper.reshape(wordds)
          bidi_text = get_display(reshaped_text)
          window["word"].update(bidi_text)
          window.refresh()
